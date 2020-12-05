@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">IFSC</string>
+    <string name="info">Info</string>
+    <string name="category">Category</string>
+    <string name="home">Home</string>
+    <string name="categorias">Categorias</string>
+    <string name="editais">Editais</string>
+    <string name="feito_no_if">Feito no IF</string>
+    <string name="cidade">Cidade</string>
+    <string name="moradia">Moradia</string>
+    <string name="programas">Programas</string>
+    <string name="aux_lios">Auxílios</string>
+    <string name="mapa">Mapa</string>
+</resources>
