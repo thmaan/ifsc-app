@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,39 +30,40 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     private View view;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     public ArrayList<Category> categories;
+    RecyclerView.Adapter myAdapter;
 
     public interface FragmentCommunicator {
         void fragmentContactActivity(int a);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_categories ,container,false);
+        RecyclerView recyclerView = view.findViewById(R.id.categoryList);
+        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getActivity(),3);
+        recyclerView.setLayoutManager(layoutManager);
+
+        categories = new ArrayList<>();
+        api();
+        getCategories();
+        myAdapter = new CategoryAdapter(categories);
+        recyclerView.setAdapter(myAdapter);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        categories = new ArrayList<>();
-
-        api();
-        getCategories();
     }
-    public void show(){
-        RecyclerView recyclerView;
-        RecyclerView.Adapter myAdapter;
-        RecyclerView.LayoutManager layoutManager;
 
-        recyclerView = view.findViewById(R.id.categoryList);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new GridLayoutManager(this.getActivity(),3);
-        recyclerView.setLayoutManager(layoutManager);
-
-        myAdapter = new CategoryAdapter(categories);
-        recyclerView.setAdapter(myAdapter);
-    }
     public void getCategories(){
         Call<List<Category>> call = jsonPlaceHolderApi.getCategorias();
         call.enqueue(new Callback<List<Category>>() {
@@ -75,7 +77,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                 for (Category category: categoriesResponse){
                     categories.add(new Category(category.getId(),category.getName(),category.getDescription()));
                 }
-                show();
+                myAdapter.notifyDataSetChanged();
             }
 
             @Override
