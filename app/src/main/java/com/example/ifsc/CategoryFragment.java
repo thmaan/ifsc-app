@@ -28,10 +28,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CategoryFragment extends Fragment implements View.OnClickListener {
     private FragmentCommunicator fragmentCommunicator;
     private View view;
-    private JsonPlaceHolderApi jsonPlaceHolderApi;
+    //private JsonPlaceHolderApi jsonPlaceHolderApi;
     public ArrayList<Category> categories;
     RecyclerView.Adapter myAdapter;
-
+    private Api apiConnection;
     public interface FragmentCommunicator {
         void fragmentContactActivity(int a);
     }
@@ -44,6 +44,8 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        apiConnection = Api.getInstance();
+
         view = inflater.inflate(R.layout.fragment_categories ,container,false);
         RecyclerView recyclerView = view.findViewById(R.id.categoryList);
         recyclerView.setHasFixedSize(true);
@@ -52,10 +54,11 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
 
         categories = new ArrayList<>();
-        api();
+        //api();
         getCategories();
         myAdapter = new CategoryAdapter(categories);
         recyclerView.setAdapter(myAdapter);
+
         return view;
     }
 
@@ -65,7 +68,11 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getCategories(){
-        Call<List<Category>> call = jsonPlaceHolderApi.getCategorias();
+        Call<List<Category>> call =  apiConnection.getJsonPlaceHolderApi().getCategorias();
+
+        int test = apiConnection.hashCode();
+        Toast.makeText(getContext(), "" + test, Toast.LENGTH_SHORT).show();
+
         call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
@@ -85,23 +92,6 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "failed bro", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    public void api(){
-        //Gson gson = new GsonBuilder().serializeNulls().create();
-
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://twomoods.pythonanywhere.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build();
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
     }
     @Override
     public void onAttach(@NonNull Context activity) {

@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    private Api apiConnection;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +34,6 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new CategoryFragment()).commit();
-
-        /*fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, new CategoryFragment());
-        fragmentTransaction.commit();*/
 
     }
 
