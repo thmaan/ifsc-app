@@ -12,13 +12,32 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
     private List<Category> mData;
+    private OnItemClickedListener mListener;
+
+    public interface OnItemClickedListener {
+        void onItemClicked(int pos);
+    }
+    public void setOnItemClickedListener(OnItemClickedListener listener){
+        mListener = listener;
+    }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView tv_category_name;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnItemClickedListener listener) {
             super(itemView);
             tv_category_name = itemView.findViewById(R.id.category_name_id);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClicked(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -30,7 +49,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cardview_item_category, parent,false);
-        return new MyViewHolder((view));
+        return new MyViewHolder(view, mListener);
     }
 
     @Override

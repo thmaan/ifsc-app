@@ -24,10 +24,10 @@ import retrofit2.Response;
 public class CategoryFragment extends Fragment implements View.OnClickListener {
     private FragmentCommunicator fragmentCommunicator;
     private View view;
-    //private JsonPlaceHolderApi jsonPlaceHolderApi;
     public ArrayList<Category> categories;
-    RecyclerView.Adapter myAdapter;
+    CategoryAdapter myAdapter;
     private Api apiConnection;
+
     public interface FragmentCommunicator {
         void fragmentContactActivity(int a);
     }
@@ -50,10 +50,19 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
 
         categories = new ArrayList<>();
-        //api();
         getCategories();
         myAdapter = new CategoryAdapter(categories);
         recyclerView.setAdapter(myAdapter);
+
+        myAdapter.setOnItemClickedListener(new CategoryAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClicked(int pos) {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1, new Example2Fragment()).commit();
+
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,
+                      new Example1Fragment()).commit();
+            }
+        });
 
         return view;
     }

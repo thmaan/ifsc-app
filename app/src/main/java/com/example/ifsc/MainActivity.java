@@ -28,10 +28,24 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
 
     }
 
+    private void removeFragments() {
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container1) != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container1))
+                    .commit();
+        }
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container1) != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container2))
+                    .commit();
+        }
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
                 Fragment selectedFragment = null;
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.nav_home:
                         selectedFragment = new CategoryFragment();
                         break;
@@ -45,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
                         selectedFragment = new MapFragment();
                         break;
                 }
+                removeFragments();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         selectedFragment).commit();
                 return true;
