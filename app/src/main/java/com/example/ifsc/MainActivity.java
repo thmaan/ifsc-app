@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
                     .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container1))
                     .commit();
         }
-        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container1) != null) {
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container2) != null) {
             getSupportFragmentManager().beginTransaction()
                     .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container2))
                     .commit();

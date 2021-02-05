@@ -13,12 +13,5 @@ public class ApplicationClass extends Application {
         super.onCreate();
 
         categories = new ArrayList<>();
-
-        Category category = new Category("-1","Categoria","Categoria inicial");
-        categories.add(category);
-        Category category1 = new Category("-1","Categoria","Categoria inicial");
-        categories.add(category1);
-        Category category2 = new Category("-1","Categoria","Categoria inicial");
-        categories.add(category2);
     }
 }

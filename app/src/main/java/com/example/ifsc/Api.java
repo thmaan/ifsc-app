@@ -30,7 +30,7 @@ public class Api {
                 .build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://twomoods.pythonanywhere.com/")
+                .baseUrl("https://myifscapp.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

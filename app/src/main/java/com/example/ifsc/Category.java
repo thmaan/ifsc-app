@@ -1,14 +1,15 @@
 package com.example.ifsc;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Category {
     private String id;
     private String name;
-    private String description;
 
-    public Category(String id, String name, String description) {
+
+    public Category(String id, String name) {
         this.id = id;
         this.name = name;
-        this.description = description;
     }
 
     public String getId() {
@@ -17,9 +18,5 @@ public class Category {
 
     public String getName() {
         return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }

@@ -73,7 +73,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getCategories(){
-        Call<List<Category>> call =  apiConnection.getJsonPlaceHolderApi().getCategorias();
+        Call<List<Category>> call =  apiConnection.getJsonPlaceHolderApi().getCategories();
 
         int test = apiConnection.hashCode();
         Toast.makeText(getContext(), "" + test, Toast.LENGTH_SHORT).show();
@@ -86,8 +86,10 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 List<Category> categoriesResponse = response.body();
+                Toast.makeText(getActivity(), "Code: " + response.body(), Toast.LENGTH_SHORT).show();
                 for (Category category: categoriesResponse){
-                    categories.add(new Category(category.getId(),category.getName(),category.getDescription()));
+                    Toast.makeText(getActivity(), "Code: " + response.body(), Toast.LENGTH_SHORT).show();
+                    categories.add(new Category(category.getId(),category.getName()));
                 }
                 myAdapter.notifyDataSetChanged();
             }
