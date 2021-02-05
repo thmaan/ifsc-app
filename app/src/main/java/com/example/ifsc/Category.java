@@ -1,7 +1,5 @@
 package com.example.ifsc;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Category {
     private String id;
     private String name;
