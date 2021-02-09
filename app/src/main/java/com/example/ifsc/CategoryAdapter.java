@@ -8,10 +8,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
-    private List<Category> mData;
+    //private List<Category> mData;
+    private HashSet<String> cat;
+    //private Map<String, String> myData;
+    private ArrayList<String> myData;
     private OnItemClickedListener mListener;
 
     public interface OnItemClickedListener {
@@ -40,9 +49,24 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             });
         }
     }
-
+    /*
     public CategoryAdapter(List<Category> mData) {
         this.mData = mData;
+    }*/
+    public CategoryAdapter(HashSet<String> cat) {
+        this.cat = cat;
+    }
+    /*public CategoryAdapter(Map<String,String> myData) {
+        this.myData = myData;
+    }*/
+
+    public void hashConverter(){
+        myData = new ArrayList<>();
+        for (String i: cat
+             ) {
+            myData.add(i);
+        }
+        //Collections.sort(test);
     }
     @NonNull
     @Override
@@ -54,13 +78,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tv_category_name.setText(mData.get(position).getId());
+        hashConverter();
+        holder.tv_category_name.setText(myData.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return cat.size();
     }
-
-
 }

@@ -1,20 +1,16 @@
 package com.example.ifsc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
-    private String id;
-    private String name;
+   private ArrayList<String> tags;
 
-
-    public Category(String id, String name) {
-        this.id = id;
-        this.name = name;
+    public Category(ArrayList<String> categories) {
+        this.tags = categories;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    public ArrayList<String> getTags() {
+        return tags;
     }
 }

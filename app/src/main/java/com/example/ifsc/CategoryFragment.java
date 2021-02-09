@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +27,9 @@ import retrofit2.Response;
 public class CategoryFragment extends Fragment implements View.OnClickListener {
     private FragmentCommunicator fragmentCommunicator;
     private View view;
-    public ArrayList<Category> categories;
+    //public ArrayList<Category> categories;
+    //public Map<String,String> categoriesMap;
+    public HashSet<String> categories;
     CategoryAdapter myAdapter;
     private Api apiConnection;
 
@@ -49,7 +54,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getActivity(),3);
         recyclerView.setLayoutManager(layoutManager);
 
-        categories = new ArrayList<>();
+        categories = new HashSet<>();
         getCategories();
         myAdapter = new CategoryAdapter(categories);
         recyclerView.setAdapter(myAdapter);
@@ -86,14 +91,13 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 List<Category> categoriesResponse = response.body();
-                Toast.makeText(getActivity(), "Code: " + response.body(), Toast.LENGTH_SHORT).show();
-                for (Category category: categoriesResponse){
-                    Toast.makeText(getActivity(), "Code: " + response.body(), Toast.LENGTH_SHORT).show();
-                    categories.add(new Category(category.getId(),category.getName()));
+                for (Category category : categoriesResponse) {
+                    for (String tag : category.getTags()) {
+                        categories.add(tag);
+                    }
+                    myAdapter.notifyDataSetChanged();
                 }
-                myAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
                 Toast.makeText(getActivity(), "failed bro", Toast.LENGTH_SHORT).show();
