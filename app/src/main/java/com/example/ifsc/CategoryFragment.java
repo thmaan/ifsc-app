@@ -13,11 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,11 +58,18 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
 
         myAdapter.setOnItemClickedListener(new CategoryAdapter.OnItemClickedListener() {
             @Override
-            public void onItemClicked(int pos) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1, new Example2Fragment()).commit();
+            public void onItemClicked(int pos, String item) {
+                Fragment fragment = new ListFragments();
+                Bundle bundle = new Bundle();
+                bundle.putString("key", item);
+                fragment.setArguments(bundle);
 
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,
-                      new Example1Fragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                //getActivity().getSupportFragmentManager().beginTransaction().
+                        //replace(R.id.fragment_container, new ListFragments()).commit();
+
+            //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                      //new ListFragments()).commit();
             }
         });
 

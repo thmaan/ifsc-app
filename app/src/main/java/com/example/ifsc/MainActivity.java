@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
 
     }
 
-    private void removeFragments() {
+    /*private void removeFragments() {
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_container1) != null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
                     .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container2))
                     .commit();
         }
-    }
+    }*/
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
                         selectedFragment = new MapFragment();
                         break;
                 }
-                removeFragments();
+                //removeFragments();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         selectedFragment).commit();
                 return true;

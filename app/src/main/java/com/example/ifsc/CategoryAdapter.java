@@ -20,11 +20,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     //private List<Category> mData;
     private HashSet<String> cat;
     //private Map<String, String> myData;
-    private ArrayList<String> myData;
+    private static ArrayList<String> myData;
     private OnItemClickedListener mListener;
 
     public interface OnItemClickedListener {
-        void onItemClicked(int pos);
+        void onItemClicked(int pos, String item);
     }
     public void setOnItemClickedListener(OnItemClickedListener listener){
         mListener = listener;
@@ -42,7 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
                     if (listener != null){
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION){
-                            listener.onItemClicked(position);
+                            listener.onItemClicked(position, myData.get(position));
                         }
                     }
                 }
@@ -53,13 +53,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public CategoryAdapter(List<Category> mData) {
         this.mData = mData;
     }*/
-    public CategoryAdapter(HashSet<String> cat) {
-        this.cat = cat;
-    }
     /*public CategoryAdapter(Map<String,String> myData) {
         this.myData = myData;
     }*/
 
+    public CategoryAdapter(HashSet<String> cat) {
+        this.cat = cat;
+    }
     public void hashConverter(){
         myData = new ArrayList<>();
         for (String i: cat
