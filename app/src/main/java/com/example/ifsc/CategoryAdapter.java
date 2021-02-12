@@ -9,17 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
-    //private List<Category> mData;
-    private HashSet<String> cat;
-    //private Map<String, String> myData;
+    private final HashSet<String> cat;
     private static ArrayList<String> myData;
     private OnItemClickedListener mListener;
 
@@ -36,14 +30,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             super(itemView);
             tv_category_name = itemView.findViewById(R.id.category_name_id);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            listener.onItemClicked(position, myData.get(position));
-                        }
+            itemView.setOnClickListener(v -> {
+                if (listener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        listener.onItemClicked(position, myData.get(position));
                     }
                 }
             });
@@ -62,10 +53,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     }
     public void hashConverter(){
         myData = new ArrayList<>();
-        for (String i: cat
-             ) {
-            myData.add(i);
-        }
+        //no lugar do foreach
+        myData.addAll(cat);
         //Collections.sort(test);
     }
     @NonNull

@@ -1,7 +1,6 @@
 package com.example.ifsc;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Category {
    private ArrayList<String> tags;

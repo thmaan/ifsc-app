@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +24,9 @@ import retrofit2.Response;
 
 public class ListFragments extends Fragment implements View.OnClickListener {
     private Api apiConnection;
-    private View view;
     ListFragmentAdapter myAdapter;
     private List<News> newsList;
-    String slug;
+    String tagId;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +37,9 @@ public class ListFragments extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         apiConnection = Api.getInstance();
         Bundle bundle = this.getArguments();
-        slug = bundle.getString("key");
+        tagId = bundle.getString("key");
 
-
-        view = inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.newsList);
         recyclerView.setHasFixedSize(true);
 
@@ -52,27 +53,29 @@ public class ListFragments extends Fragment implements View.OnClickListener {
 
         return view;
     }
-
+    public String normalizeString(String valorAcentuado){
+        return Normalizer
+                .normalize(valorAcentuado, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+    }
     public void getNews(){
-        News n = new News(slug.toLowerCase());
-
-        Call<List<News>> call = apiConnection.getJsonPlaceHolderApi().getNews(n);
+        Tags t= new Tags(normalizeString(tagId));
+        Call<List<News>> call = apiConnection.getJsonPlaceHolderApi().getNews(t);
 
         call.enqueue(new Callback<List<News>>() {
             @Override
-            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+            public void onResponse(@NotNull Call<List<News>> call, @NotNull Response<List<News>> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(getActivity(), "Code: " + response.message(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<News> newsResponse = response.body();
-                for (News news : newsResponse) {
-                    newsList.add(news);
-                }
+                //no lugar do for each
+                newsList.addAll(newsResponse);
                 myAdapter.notifyDataSetChanged();
             }
             @Override
-            public void onFailure(Call<List<News>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<News>> call, @NotNull Throwable t) {
                 Toast.makeText(getActivity(), "failed bro", Toast.LENGTH_SHORT).show();
             }
         });

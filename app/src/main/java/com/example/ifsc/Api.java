@@ -6,9 +6,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Api {
-    private HttpLoggingInterceptor loggingInterceptor;
-    private OkHttpClient okHttpClient;
-    private Retrofit retrofit;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
     private Api(){
@@ -22,14 +19,14 @@ public class Api {
     }
 
     public void build() {
-        loggingInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        okHttpClient = new OkHttpClient.Builder()
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
 
-        retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://myifscapp.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)

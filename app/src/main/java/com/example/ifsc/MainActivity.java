@@ -9,11 +9,7 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements CategoryFragment.FragmentCommunicator {
-
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    private Api apiConnection;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
         }
     }*/
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
@@ -64,9 +60,4 @@ public class MainActivity extends AppCompatActivity implements CategoryFragment.
                         selectedFragment).commit();
                 return true;
             };
-
-    @Override
-    public void fragmentContactActivity(int a) {
-
-    }
 }
