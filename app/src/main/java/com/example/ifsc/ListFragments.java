@@ -27,6 +27,7 @@ public class ListFragments extends Fragment implements View.OnClickListener {
     ListFragmentAdapter myAdapter;
     private List<News> newsList;
     String tagId;
+    private String token;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,14 @@ public class ListFragments extends Fragment implements View.OnClickListener {
         myAdapter = new ListFragmentAdapter(newsList);
         recyclerView.setAdapter(myAdapter);
 
+        myAdapter.setOnItemClickedListener((pos, item) -> {
+            Fragment fragment = new Example2Fragment();
+            bundle.putString("url", item);
+            fragment.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container,fragment).commit();
+        });
+
         return view;
     }
     public String normalizeString(String valorAcentuado){
@@ -60,7 +69,7 @@ public class ListFragments extends Fragment implements View.OnClickListener {
     }
     public void getNews(){
         Tags t= new Tags(normalizeString(tagId));
-        Call<List<News>> call = apiConnection.getJsonPlaceHolderApi().getNews(t);
+        Call<List<News>> call = apiConnection.getJsonPlaceHolderApi().getNews(MainActivity.token,t);
 
         call.enqueue(new Callback<List<News>>() {
             @Override

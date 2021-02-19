@@ -2,15 +2,15 @@ package com.example.ifsc;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static final String AUTH_TOKEN = "com.example.ifsc.AUTH_TOKEN";
+    public static String token = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,24 +19,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
+        Intent intent = getIntent();
+        token = intent.getStringExtra(LoginActivity.AUTH_TOKEN);
+        Bundle bundle = new Bundle();
+        bundle.putString("token",token);
+        Fragment fragment = new CategoryFragment();
+        fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new CategoryFragment()).commit();
+                fragment).commit();
 
     }
-
-    /*private void removeFragments() {
-        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container1) != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container1))
-                    .commit();
-        }
-        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container2) != null) {
-            getSupportFragmentManager().beginTransaction()
-                    .remove(getSupportFragmentManager().findFragmentById(R.id.fragment_container2))
-                    .commit();
-        }
-    }*/
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
@@ -44,20 +36,26 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
                         selectedFragment = new CategoryFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
                         break;
                     case R.id.nav_category:
                         selectedFragment = new CategoriasFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
                         break;
-                    case R.id.nav_info:
-                        selectedFragment = new InfoFragment();
+                    case R.id.nav_logout:
+                        Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
+                        intent1.putExtra("LOGOUT","sim");
+                        startActivity(intent1);
                         break;
                     case R.id.nav_map:
                         selectedFragment = new MapFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
                         break;
                 }
                 //removeFragments();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        selectedFragment).commit();
                 return true;
             };
 }

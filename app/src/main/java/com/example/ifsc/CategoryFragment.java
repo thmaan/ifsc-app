@@ -28,7 +28,6 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     public HashSet<String> categories;
     CategoryAdapter myAdapter;
     private Api apiConnection;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +56,8 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
             bundle.putString("key", item);
             fragment.setArguments(bundle);
 
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, fragment).commit();
 
         });
 
@@ -70,7 +70,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getCategories() {
-        Call<List<Category>> call = apiConnection.getJsonPlaceHolderApi().getCategories();
+        Call<List<Category>> call = apiConnection.getJsonPlaceHolderApi().getCategories(MainActivity.token);
 
         call.enqueue(new Callback<List<Category>>() {
             @Override
@@ -95,5 +95,6 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
+
     }
 }

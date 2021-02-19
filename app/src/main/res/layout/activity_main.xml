@@ -19,7 +19,14 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation"
         android:background="?android:attr/windowBackground"
-        app:itemTextColor="@color/purple_700"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:fitsSystemWindows="true"
+        app:itemIconTint="@drawable/tab_color"
+        app:itemTextColor="@drawable/tab_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         />
 
 </RelativeLayout>

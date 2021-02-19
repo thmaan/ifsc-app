@@ -11,13 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapter.MyViewHolder> {
-    private final List<News> myData;
-    private ListFragmentAdapter.OnItemClickedListener mListener;
+    private static List<News> myData;
+    private OnItemClickedListener mListener;
 
     public interface OnItemClickedListener {
-        void onItemClicked(int pos);
+        void onItemClicked(int pos, String item);
     }
-
     public void setOnItemClickedListener(OnItemClickedListener listener){
         mListener = listener;
     }
@@ -36,7 +35,7 @@ public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapte
                 if (listener != null){
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION){
-                        listener.onItemClicked(position);
+                        listener.onItemClicked(position,myData.get(position).getTitle());
 
                     }
                 }
