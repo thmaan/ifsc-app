@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7abecc">
+    android:background="@drawable/login_ifsc">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -16,15 +17,13 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="170dp"
         android:layout_marginEnd="44dp"
-        android:layout_marginBottom="245dp"
-        android:background="#74cfbf">
+        android:layout_marginBottom="196dp">
 
         <EditText
             android:id="@+id/usernameTextView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:autofillHints="Username"
-            android:background="#ffffff"
             android:drawablePadding="4dp"
             android:ems="10"
             android:hint="Username..."
@@ -33,17 +32,15 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.314" />
+            app:layout_constraintVertical_bias="0.108" />
 
         <EditText
             android:id="@+id/passwordTextView"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:autofillHints="Password..."
-            android:background="#FFFFFF"
             android:drawablePadding="4dp"
             android:ems="10"
             android:hint="password"
@@ -52,16 +49,14 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameTextView"
-            app:layout_constraintVertical_bias="0.134" />
+            app:layout_constraintVertical_bias="0.064" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LOGIN"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/usernameTextView"
@@ -69,54 +64,54 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="105dp"
-            android:layout_height="29dp"
-            app:cardBackgroundColor="#33ccff"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="113dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordTextView">
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
+            app:layout_constraintVertical_bias="0.447">
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="Login"
-                    android:textColor="#FFFFFF" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Log In"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="signUp"
-            android:text="Don't have an account? Sign Up"
-            android:textColor="#000000"
+            android:text="Ainda não tem uma conta? Cadastre-se."
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintVertical_bias="0.44" />
 
         <Switch
+            android:theme="@style/ToggleSwitchTheme"
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Remember me "
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
+            android:text="Lembrar identificação"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.915"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
             app:layout_constraintVertical_bias="0.428" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

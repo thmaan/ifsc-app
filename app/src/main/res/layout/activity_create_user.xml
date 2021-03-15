@@ -1,123 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    android:background="@color/forestgreen"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/registro_ifsc">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernamelayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+
+    <EditText
+        android:id="@+id/add_username"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:autofillHints="Username"
+        android:drawablePadding="4dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/add_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.723" />
+
+    <EditText
+        android:id="@+id/add_password"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:autofillHints="Username"
+        android:drawablePadding="4dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.25" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/add_username"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autofillHints="Username"
-            android:background="#ffffff"
-            android:drawablePadding="4dp"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:padding="2dp"
-            android:textColor="#000"
-            android:textColorHint="#000000"
-            android:textSize="16sp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-
-        android:id="@+id/passwordlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+    <EditText
+        android:id="@+id/add_password2"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:autofillHints="Username"
+        android:drawablePadding="4dp"
+        android:ems="10"
+        android:hint="Confirme a senha"
+        android:inputType="textPersonName"
+        android:padding="2dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernamelayout"
-        app:layout_constraintVertical_bias="0.076">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/add_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autofillHints="Password..."
-            android:background="#FFFFFF"
-            android:drawablePadding="4dp"
-            android:ems="10"
-            android:hint="Senha"
-            android:inputType="textPassword"
-            android:padding="2dp"
-            android:textColor="#000000"
-            android:textColorHint="#000"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password2layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordlayout"
-        android:layout_margin="30dp"
-        app:layout_constraintVertical_bias="0.076">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/add_password2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autofillHints="Password..."
-            android:background="#FFFFFF"
-            android:drawablePadding="4dp"
-            android:ems="10"
-            android:hint="Confirme a senha"
-            android:inputType="textPassword"
-            android:padding="2dp"
-            android:textColor="#000000"
-            android:textColorHint="#000"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/register_button"
-        android:layout_width="129dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="252dp"
-        android:background="@color/limegreen"
-        android:textColor="@color/white"
-        android:text="Registrar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password2layout"
-        app:layout_constraintVertical_bias="0.402" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.425" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrar Usuário"
-        android:textColor="#FFFFFF"
+        android:text="Cadastro"
+        android:textColor="@color/black"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/usernamelayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.531" />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="129dp"
+        android:layout_height="49dp"
+        android:background="@drawable/custom_button"
+        android:text="registrar"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.859" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

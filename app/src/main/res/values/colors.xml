@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="greenyellow">#ADFF2F</color>
     <color name="limegreen">#32CD32</color>
-    <color name="forestgreen">#60228B22</color>
+    <color name="forestgreen">#228B22</color>
+    <color name="green">#67AE54</color>
+    <color name="grey">#F0DFDEE8</color>
+    <color name="blue">#05B7FD</color>
+    <color name="icon_green">#5AFF29</color>
 </resources>

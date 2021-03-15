@@ -1,11 +1,14 @@
 package com.example.ifsc;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class News {
     private String title;
     private ArrayList<String> tags;
+    @SerializedName("introduction")
     private String description;
     private String slug;
     private String published;

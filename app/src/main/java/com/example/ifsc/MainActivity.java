@@ -9,7 +9,6 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String AUTH_TOKEN = "com.example.ifsc.AUTH_TOKEN";
     public static String token = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,26 +20,33 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         token = intent.getStringExtra(LoginActivity.AUTH_TOKEN);
+        String username = intent.getStringExtra(LoginActivity.USERNAME);
         Bundle bundle = new Bundle();
         bundle.putString("token",token);
-        Fragment fragment = new CategoryFragment();
+        bundle.putString("username",username);
+        Fragment fragment = new HomeFragment();
         fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                fragment).commit();
+        getSupportFragmentManager().beginTransaction().
+                replace(R.id.fragment_container,   fragment).addToBackStack("fragment").commit();
 
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
-                Fragment selectedFragment = null;
+                Fragment selectedFragment;
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        selectedFragment = new CategoryFragment();
+                        selectedFragment = new HomeFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 selectedFragment).commit();
                         break;
                     case R.id.nav_category:
-                        selectedFragment = new CategoriasFragment();
+                        selectedFragment = new CategoryFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
+                        break;
+                    case R.id.nav_guides:
+                        selectedFragment = new GuideFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 selectedFragment).commit();
                         break;
@@ -49,13 +55,16 @@ public class MainActivity extends AppCompatActivity {
                         intent1.putExtra("LOGOUT","sim");
                         startActivity(intent1);
                         break;
-                    case R.id.nav_map:
-                        selectedFragment = new MapFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                selectedFragment).commit();
-                        break;
                 }
                 //removeFragments();
                 return true;
             };
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

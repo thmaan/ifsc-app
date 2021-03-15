@@ -3,13 +3,16 @@ package com.example.ifsc;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -40,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TOKEN = "token";
     public static final String SWITCH1 = "switch";
     private Api apiConnection;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+    public String getUsername(){
+        return usernameTextView.getText().toString();
+    }
     public void openMainActivity(){
         login();
     }
@@ -121,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                  saveData();
                  intent = new Intent(LoginActivity.this, MainActivity.class);
                  intent.putExtra(AUTH_TOKEN, token);
+                 intent.putExtra(USERNAME,username);
                  LoginActivity.this.startActivity(intent);
              }
 
@@ -160,8 +166,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        username = sharedPreferences.getString(USERNAME," NAO ACHEI USER");
-        password = sharedPreferences.getString(PASSWORD," ");
+        username = sharedPreferences.getString(USERNAME,"");
+        password = sharedPreferences.getString(PASSWORD,"");
         token = sharedPreferences.getString(TOKEN," ");
         autoLogin = sharedPreferences.getString(AUTO_LOGIN,"sem auto login");
         switchOnOff = sharedPreferences.getBoolean(SWITCH1,false);

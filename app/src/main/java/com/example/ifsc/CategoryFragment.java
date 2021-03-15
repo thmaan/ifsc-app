@@ -1,19 +1,26 @@
 package com.example.ifsc;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.Normalizer;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,8 +30,6 @@ import retrofit2.Response;
 
 
 public class CategoryFragment extends Fragment implements View.OnClickListener {
-    //public ArrayList<Category> categories;
-    //public Map<String,String> categoriesMap;
     public HashSet<String> categories;
     CategoryAdapter myAdapter;
     private Api apiConnection;
@@ -42,7 +47,7 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         RecyclerView recyclerView = view.findViewById(R.id.categoryList);
         recyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getActivity(),3);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getActivity(),2, LinearLayoutManager.VERTICAL ,false);
         recyclerView.setLayoutManager(layoutManager);
 
         categories = new HashSet<>();
@@ -51,19 +56,23 @@ public class CategoryFragment extends Fragment implements View.OnClickListener {
         recyclerView.setAdapter(myAdapter);
 
         myAdapter.setOnItemClickedListener((pos, item) -> {
-            Fragment fragment = new ListFragments();
+            Fragment fragment = new ListFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("key", item);
+            bundle.putString("key", normalizeString(item));
             fragment.setArguments(bundle);
 
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fragment).commit();
+                    .replace(R.id.fragment_container, fragment).addToBackStack("fragment").commit();
 
         });
 
         return view;
     }
-
+    public String normalizeString(String string){
+        return Normalizer
+                .normalize(string, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "").replaceAll("[ \\t\\n\\x0B\\f\\r]","-").toLowerCase();
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

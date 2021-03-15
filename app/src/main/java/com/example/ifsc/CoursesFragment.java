@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,9 +22,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListFragments extends Fragment implements View.OnClickListener {
+public class CoursesFragment extends Fragment implements View.OnClickListener {
     private Api apiConnection;
-    ListFragmentAdapter myAdapter;
+    CoursesAdapter myAdapter;
     private List<News> newsList;
     String tagId;
     private String token;
@@ -40,31 +40,31 @@ public class ListFragments extends Fragment implements View.OnClickListener {
         Bundle bundle = this.getArguments();
         tagId = bundle.getString("key");
 
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.newsList);
+        View view = inflater.inflate(R.layout.fragment_courses, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.courseList);
         recyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this.getActivity(),2,RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
         newsList = new ArrayList<>();
         getNews();
-        myAdapter = new ListFragmentAdapter(newsList);
+        myAdapter = new CoursesAdapter(newsList);
         recyclerView.setAdapter(myAdapter);
 
         myAdapter.setOnItemClickedListener((pos, item) -> {
-            Fragment fragment = new Example2Fragment();
+            Fragment fragment = new WebViewFragment();
             bundle.putString("url", item);
             fragment.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container,fragment).commit();
+                    .replace(R.id.fragment_container,fragment).addToBackStack("fragment").commit();
         });
 
         return view;
     }
-    public String normalizeString(String valorAcentuado){
+    public String normalizeString(String string){
         return Normalizer
-                .normalize(valorAcentuado, Normalizer.Form.NFD)
+                .normalize(string, Normalizer.Form.NFD)
                 .replaceAll("[^\\p{ASCII}]", "").toLowerCase();
     }
     public void getNews(){

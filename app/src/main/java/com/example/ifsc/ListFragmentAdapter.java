@@ -49,15 +49,16 @@ public class ListFragmentAdapter extends RecyclerView.Adapter<ListFragmentAdapte
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_news_item, parent, false);
+                .inflate(R.layout.cardview_list_news_item, parent, false);
         return new MyViewHolder(view, mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListFragmentAdapter.MyViewHolder holder, int position) {
+        String text = "Data de Publicação: ";
         holder.tv_title.setText(myData.get(position).getTitle());
         holder.tv_description.setText(myData.get(position).getDescription());
-        holder.tv_date.setText((myData.get(position).getPublished()));
+        holder.tv_date.setText(String.format("%s%s", text, myData.get(position).getPublished()));
 
     }
 
