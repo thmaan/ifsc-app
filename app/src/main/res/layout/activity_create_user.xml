@@ -16,7 +16,7 @@
         android:autofillHints="Username"
         android:drawablePadding="4dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Usuário"
         android:inputType="textPersonName"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -76,20 +76,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.531" />
+        app:layout_constraintVertical_bias="0.463" />
 
-    <Button
-        android:id="@+id/register_button"
-        android:layout_width="129dp"
-        android:layout_height="49dp"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="76dp"
         android:background="@drawable/custom_button"
-        android:text="registrar"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintHorizontal_bias="0.877"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintTop_toBottomOf="@+id/add_password2"
+        app:layout_constraintVertical_bias="0.447">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="REGISTRAR"
+            android:textSize="16dp"
+            android:textColor="@color/white" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

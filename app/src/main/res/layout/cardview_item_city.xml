@@ -8,7 +8,6 @@
     cardview:cardCornerRadius="20dp"
     cardview:cardPreventCornerOverlap="true"
     cardview:cardUseCompatPadding="true"
-    android:layout_margin="4dp"
     android:background="@null">
 
     <androidx.constraintlayout.widget.ConstraintLayout

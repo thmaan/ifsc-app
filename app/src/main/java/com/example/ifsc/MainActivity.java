@@ -3,6 +3,7 @@ package com.example.ifsc;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     public static String token = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getApplication().setTheme(R.style.Theme_IFSC);
+        setTheme(R.style.Theme_IFSC);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
                 Fragment selectedFragment;

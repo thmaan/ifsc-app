@@ -33,10 +33,11 @@
 
         <TextView
             android:id="@+id/news_description"
-            android:layout_width="355dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:padding="4dp"
+            android:layout_marginEnd="6dp"
+            android:padding="6dp"
             android:text="Foi divulgado no dia 09/02, que o edital de ingresso do curso de ADS do ifsc estara aberto entre os dias XX e XX de XX, para mais informações visite o site
 "
             android:textAlignment="center"
@@ -54,7 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data de publicação: 25/02/2020"
-            android:layout_margin="4dp"
+            android:layout_marginStart="6dp"
+            android:padding="6dp"
             android:textSize="14sp"
             android:textAlignment="center"
             android:textColor="@color/black"

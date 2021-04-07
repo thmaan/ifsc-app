@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,29 +20,24 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateUserActivity extends AppCompatActivity {
-    private JsonPlaceHolderApi jsonPlaceHolderApi;
-    private String token = "";
     private TextView usernameTextView;
     private TextView passwordTextView;
-    private Button confirmButton;
     private Api apiConnection;
+    private RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getApplication().setTheme(R.style.Theme_IFSC);
+        setTheme(R.style.Theme_IFSC);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
         apiConnection = Api.getInstance();
         Intent intent = getIntent();
-        token = intent.getStringExtra(LoginActivity.AUTH_TOKEN);
+        String token = intent.getStringExtra(LoginActivity.AUTH_TOKEN);
         usernameTextView = findViewById(R.id.add_username);
         passwordTextView = findViewById(R.id.add_password);
 
-        confirmButton = findViewById(R.id.register_button);
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createUser();
-            }
-        });
+        relativeLayout = findViewById(R.id.relativeLayout);
+        relativeLayout.setOnClickListener(v -> createUser());
 
     }
     private void callLogin(){

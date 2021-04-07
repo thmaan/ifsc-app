@@ -23,7 +23,6 @@ public class WebViewFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         String url = normalizeString(bundle.getString("url"));
-        Toast.makeText(getActivity(), ""+url, Toast.LENGTH_SHORT).show();
         myWebView = view.findViewById(R.id.webview);
         myWebView.loadUrl("https://myifscapp.pythonanywhere.com/detail/"+url);
         //myWebView.loadUrl("https://www.ifsc.edu.br/web/campus-canoinhas/cursos");
